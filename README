@@ -1,0 +1,56 @@
+# KitapBlog - ASP.NET Core ile Geliştirilmiş Blog Yönetimi Projesi
+
+Bu proje, ASP.NET Core Razor Pages kullanılarak geliştirilmiş bir blog yönetimi uygulamasıdır. Uygulama, kullanıcıların blog yazısı paylaşabildiği, kategori filtreleme yapabildiği, yorum bırakabildiği ve görsellerle desteklenen bir kitap/blog temalı içerik platformudur.
+
+## Genel Özellikler
+
+-  Blog yazısı ekleme, düzenleme, silme (CRUD)
+-  Görsel (kapak fotoğrafı) yükleme
+-  Yorum yapma (yalnızca giriş yapan kullanıcılar)
+-  Giriş / Kayıt sistemi (Identity)
+-  Kategori sistemi ve filtreleme
+-  Responsive tasarım (Bootstrap)
+-  Yalnızca admin yetkisiyle kategori düzenleme
+
+---
+
+## Kullanıcı Rolleri
+
+### Normal Kullanıcı
+- Blogları görebilir ve okuyabilir  
+- Giriş yaptıktan sonra:
+  - Blog yazısı ekleyebilir
+  - Yalnızca kendi blog yazılarını **düzenleyip silebilir**
+  - Yorum bırakabilir
+  - Sadece kendi yorumlarını **silebilir**
+  - “Yazılarım” sayfasından kendi içeriklerini listeleyebilir
+
+###  Admin (admin@example.com)
+- Yukarıdakilere ek olarak:
+  - Tüm **kategori işlemlerini** yapabilir (ekle, düzenle, sil)
+  - Giriş yapmış her kullanıcıdan farklı olarak kategori sayfalarına tam erişime sahiptir
+
+> Admin yetkisi kontrolü `User.Identity.Name == "admin@example.com"` şeklinde yapılmaktadır.
+
+
+## 💾 Teknolojiler
+
+- ASP.NET Core Razor Pages (.NET 8.0)
+- Entity Framework Core
+- Identity Authentication
+- SQL Server (LocalDb)
+- Bootstrap 5
+- Visual Studio 2022
+
+
+## 🧪 Admin kullanıcı Bilgileri
+
+| Rol    | E-posta              | Şifre         |
+|--------|----------------------|----------------|
+| Admin  | admin@example.com    | Admin1.      |
+
+> Not: Şifre kuralları gereği bir büyük harf, bir özel karakter ve sayı içermelidir.
+
+
+
+- Zeynep Kurt – Geliştirici & Tasarımcı  
