@@ -1,0 +1,29 @@
+@using Microsoft.AspNetCore.Identity
+@using BlogApp.Models <!-- ApplicationUser için -->
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var currentUser = await UserManager.GetUserAsync(User);
+
+        <li class="nav-item">
+            <span class="nav-link text-light">Hoþ geldin, @currentUser?.FullName</span>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                <button type="submit" class="btn btn-sm btn-outline-light">Çýkýþ</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Giriþ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Kayýt Ol</a>
+        </li>
+    }
+</ul>

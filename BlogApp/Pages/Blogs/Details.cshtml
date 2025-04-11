@@ -1,0 +1,69 @@
+﻿@page
+@model BlogApp.Pages.Blogs.DetailsModel
+
+<h2>@Model.Blog.Title</h2>
+
+<p><strong>Yazar:</strong> @Model.Blog.Author</p>
+<p><strong>Tarih:</strong> @Model.Blog.PublishDate.ToString("dd.MM.yyyy HH:mm")</p>
+<p><strong>Kategori:</strong> @Model.Blog.Category?.Name</p>
+
+@if (!string.IsNullOrEmpty(Model.Blog.ImagePath))
+{
+    <img src="@Model.Blog.ImagePath" alt="Blog Görseli" style="max-width: 600px; border-radius: 10px; margin-top:10px;" />
+}
+
+<p style="margin-top: 20px;"><strong>İçerik:</strong></p>
+<p>@Model.Blog.Content</p>
+
+<h4>Yorumlar</h4>
+@if (Model.Comments != null && Model.Comments.Count > 0)
+{
+    @foreach (var comment in Model.Comments)
+    {
+        <div class="border p-2 mb-2 rounded position-relative">
+            <p>@comment.Content</p>
+            <small><strong>@comment.Author</strong> - @comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+
+            @if (User.Identity.IsAuthenticated && comment.UserId == Model.CurrentUserId)
+            {
+                <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id" class="position-absolute end-0 top-0 me-2 mt-2">
+                    <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                </form>
+            }
+        </div>
+    }
+
+}
+else
+{
+    <p>Henüz yorum yapılmamış.</p>
+}
+
+<h5>Yorum Ekle</h5>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="NewComment.Content">Yorumunuz</label>
+            <textarea asp-for="NewComment.Content" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="NewComment.Content" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Gönder</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning">
+        Yorum eklemek için <a asp-page="/Identity/Account/Login">giriş yapmalısınız</a>.
+    </div>
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<a asp-page="Index" class="btn btn-secondary mt-3">← Geri Dön</a>

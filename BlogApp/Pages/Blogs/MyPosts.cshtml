@@ -1,0 +1,38 @@
+﻿@page
+@model BlogApp.Pages.Blogs.MyPostsModel
+
+<h2>Benim Yazılarım</h2>
+
+@if (Model.BlogList.Count == 0)
+{
+    <p>Henüz bir yazı paylaşmadınız.</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var blog in Model.BlogList)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(blog.ImagePath))
+                    {
+                        <img src="@blog.ImagePath" class="card-img-top" style="height: 200px; object-fit: cover;" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@blog.Title</h5>
+                        <p class="card-text">@blog.Content.Substring(0, Math.Min(100, blog.Content.Length))...</p>
+                        <a asp-page="./Details" asp-route-id="@blog.Id" class="btn btn-outline-primary">Görüntüle</a>
+                    </div>
+                    @if (User.Identity.IsAuthenticated && blog.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+                    {
+                        <div class="mt-2 d-flex gap-2">
+                            <a asp-page="./Edit" asp-route-id="@blog.Id" class="btn btn-sm btn-outline-secondary">Düzenle</a>
+                            <a asp-page="./Delete" asp-route-id="@blog.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+}

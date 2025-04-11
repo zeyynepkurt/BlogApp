@@ -1,0 +1,54 @@
+﻿@page
+@model BlogApp.Pages.Blogs.IndexModel
+@using BlogApp.Models
+
+@{
+    ViewData["Title"] = "Kitaplar";
+}
+
+<h1 class="text-center mb-4">Öne Çıkan Kitaplar</h1>
+
+<form method="get" class="mb-4 d-flex align-items-center gap-2">
+    <select asp-for="SelectedCategoryId" asp-items="Model.Categories" class="form-select w-auto">
+        <option value="">Tüm Kategoriler</option>
+    </select>
+    <button type="submit" class="btn btn-outline-secondary">Filtrele</button>
+</form>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        @foreach (var item in Model.Blog)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;" alt="@item.Title" />
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text text-muted"><small>Yazar: @item.Author</small></p>
+                        <p class="card-text">
+                            @item.Content.Substring(0, Math.Min(100, item.Content.Length))...
+                        </p>
+                    </div>
+
+                    <div class="card-footer text-center bg-white border-0">
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Devamını Oku</a>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated &&
+                   item.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+                    {
+                        <div class="mt-2 d-flex gap-2 justify-content-center">
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Düzenle</a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
