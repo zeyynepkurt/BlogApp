@@ -32,7 +32,7 @@ namespace BlogApp.Pages.Blogs
 
         public void OnGet()
         {
-            // 👇 Burası eksikti, bu satır dropdown verisini gönderiyor
+            
             ViewData["CategoryId"] = new SelectList(_context.Categories.ToList(), "Id", "Name");
         }
 
@@ -61,11 +61,11 @@ namespace BlogApp.Pages.Blogs
 
             if (ImageFile != null)
             {
-                // Dosya adını oluştur (benzersiz olsun)
+                
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
                 var filePath = Path.Combine(_environment.WebRootPath, "uploads", fileName);
 
-                // uploads klasörü yoksa oluştur
+                
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -73,7 +73,7 @@ namespace BlogApp.Pages.Blogs
                     await ImageFile.CopyToAsync(stream);
                 }
 
-                // Blog modeline yolu kaydet
+                
                 Blog.ImagePath = "/uploads/" + fileName;
             }
 
@@ -86,7 +86,7 @@ namespace BlogApp.Pages.Blogs
             _context.Blogs.Add(Blog);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("✅ Blog başarıyla eklendi.");
+            Console.WriteLine("Blog başarıyla eklendi.");
             return RedirectToPage("./Index");
         }
 
