@@ -29,7 +29,7 @@ namespace BlogApp.Pages.Categories
             }
             if (User.Identity.Name != "admin@example.com")
             {
-                return Forbid(); // 👈 sadece admin erişebilir
+                return Forbid(); // sadece admin erişebilir
             }
 
             var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
