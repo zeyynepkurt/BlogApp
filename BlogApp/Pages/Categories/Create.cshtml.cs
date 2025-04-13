@@ -33,7 +33,7 @@ namespace BlogApp.Pages.Categories
             }
             if (User.Identity.Name != "admin@example.com")
             {
-                return Forbid(); // 👈 sadece admin erişebilir
+                return Forbid(); //  sadece admin erişebilir
             }
 
             Category = category;
@@ -42,26 +42,26 @@ namespace BlogApp.Pages.Categories
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Console.WriteLine("🟡 Form gönderildi"); // LOG 1
+            Console.WriteLine(" Form gönderildi"); // LOG 1
             Console.WriteLine("Gelen ad: " + Category?.Name);
 
 
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("🔴 Model geçersiz"); // LOG 2
+                Console.WriteLine(" Model geçersiz"); // LOG 2
                 return Page();
             }
             if (User.Identity.Name != "admin@example.com")
             {
-                return Forbid(); // 👈 sadece admin erişebilir
+                return Forbid(); //  sadece admin erişebilir
             }
 
-            Console.WriteLine("🟢 Model geçerli: " + Category.Name); // LOG 3
+            Console.WriteLine(" Model geçerli: " + Category.Name); // LOG 3
 
             _context.Categories.Add(Category);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("✅ Veri kaydedildi"); // LOG 4
+            Console.WriteLine(" Veri kaydedildi"); // LOG 4
 
             return RedirectToPage("./Index");
         }
