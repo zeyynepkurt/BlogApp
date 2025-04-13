@@ -4,7 +4,7 @@ using BlogApp.Models;
 
 namespace BlogApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> // ✅ Burada ApplicationUser kullanıyoruz
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
