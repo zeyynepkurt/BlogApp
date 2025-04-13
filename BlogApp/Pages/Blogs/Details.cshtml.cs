@@ -36,7 +36,7 @@ namespace BlogApp.Pages.Blogs
         }
 
 
-        public string CurrentUserId { get; set; } // Kullanıcının ID'si
+        public string CurrentUserId { get; set; } 
 
         public async Task<IActionResult> OnPostDeleteCommentAsync(int commentId)
         {
@@ -45,7 +45,7 @@ namespace BlogApp.Pages.Blogs
 
             if (comment == null || comment.UserId != currentUser.Id)
             {
-                return Forbid(); // Güvenlik: başkasının yorumunu silmeye çalışıyorsa
+                return Forbid();
             }
 
             _context.Comments.Remove(comment);
@@ -67,7 +67,7 @@ namespace BlogApp.Pages.Blogs
             if (Blog == null)
                 return NotFound();
 
-            // 👇 Kullanıcı oturum açmışsa CurrentUserId’yi al
+            
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -84,7 +84,7 @@ namespace BlogApp.Pages.Blogs
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            Console.WriteLine("🟡 Yorum eklenmeye çalışılıyor");
+            Console.WriteLine("Yorum eklenmeye çalışılıyor");
 
             if (id == null)
                 return NotFound();
@@ -106,12 +106,12 @@ namespace BlogApp.Pages.Blogs
 
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("❌ ModelState geçersiz!");
+                Console.WriteLine(" ModelState geçersiz!");
                 foreach (var state in ModelState)
                 {
                     if (state.Value.Errors.Count > 0)
                     {
-                        Console.WriteLine($"🔴 {state.Key}: {state.Value.Errors[0].ErrorMessage}");
+                        Console.WriteLine($" {state.Key}: {state.Value.Errors[0].ErrorMessage}");
                     }
                 }
 
@@ -122,7 +122,7 @@ namespace BlogApp.Pages.Blogs
             _context.Comments.Add(NewComment);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("✅ Yorum kaydedildi");
+            Console.WriteLine(" Yorum kaydedildi");
             return RedirectToPage(new { id = id });
         }
 
