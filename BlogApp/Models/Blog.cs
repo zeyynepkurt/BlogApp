@@ -7,9 +7,9 @@ public class Blog
 {
     public int Id { get; set; }
 
-    public string? UserId { get; set; } // kullanıcıya ait
+    public string? UserId { get; set; } 
     [ForeignKey("UserId")]
-    public ApplicationUser? User { get; set; } // ilişki
+    public ApplicationUser? User { get; set; }
 
 
     [Required]
@@ -26,7 +26,7 @@ public class Blog
     [Required]
     public int CategoryId { get; set; }
 
-    // Bu alan ZORUNLU OLMAMALI
+    
     [ForeignKey("CategoryId")]
     public Category? Category { get; set; }
 
