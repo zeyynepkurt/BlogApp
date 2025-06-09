@@ -43,7 +43,7 @@ Bu proje, ASP.NET Core Razor Pages kullanılarak geliştirilmiş bir blog yönet
 - Visual Studio 2022
 
 
-## 🧪 Admin kullanıcı Bilgileri
+## Admin kullanıcı Bilgileri
 
 | Rol    | E-posta              | Şifre         |
 |--------|----------------------|----------------|
@@ -52,5 +52,3 @@ Bu proje, ASP.NET Core Razor Pages kullanılarak geliştirilmiş bir blog yönet
 > Not: Şifre kuralları gereği bir büyük harf, bir özel karakter ve sayı içermelidir.
 
 
-
-- Zeynep Kurt – Geliştirici & Tasarımcı  
